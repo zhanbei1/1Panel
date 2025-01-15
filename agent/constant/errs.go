@@ -85,6 +85,7 @@ var (
 	ErrFileDownloadDir  = "ErrFileDownloadDir"
 	ErrCmdNotFound      = "ErrCmdNotFound"
 	ErrFavoriteExist    = "ErrFavoriteExist"
+	ErrPathNotDelete    = "ErrPathNotDelete"
 )
 
 // mysql
@@ -141,4 +142,13 @@ var (
 
 var (
 	ErrNotExistUser = "ErrNotExistUser"
+)
+
+// alert
+var (
+	ErrAlert       = "ErrAlert"
+	ErrAlertPush   = "ErrAlertPush"
+	ErrAlertSave   = "ErrAlertSave"
+	ErrAlertSync   = "ErrAlertSync"
+	ErrAlertRemote = "ErrAlertRemote"
 )
