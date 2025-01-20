@@ -11,9 +11,9 @@ import (
 
 // @Tags FTP
 // @Summary Load FTP base info
-// @Description 获取 FTP 基础信息
 // @Success 200 {object} dto.FtpBaseInfo
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/ftp/base [get]
 func (b *BaseApi) LoadFtpBaseInfo(c *gin.Context) {
 	data, err := ftpService.LoadBaseInfo()
@@ -27,11 +27,11 @@ func (b *BaseApi) LoadFtpBaseInfo(c *gin.Context) {
 
 // @Tags FTP
 // @Summary Load FTP operation log
-// @Description 获取 FTP 操作日志
 // @Accept json
 // @Param request body dto.FtpLogSearch true "request"
 // @Success 200 {object} dto.PageResult
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/ftp/log/search [post]
 func (b *BaseApi) LoadFtpLogInfo(c *gin.Context) {
 	var req dto.FtpLogSearch
@@ -53,10 +53,10 @@ func (b *BaseApi) LoadFtpLogInfo(c *gin.Context) {
 
 // @Tags FTP
 // @Summary Operate FTP
-// @Description 修改 FTP 状态
 // @Accept json
 // @Param request body dto.Operate true "request"
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/ftp/operate [post]
 // @x-panel-log {"bodyKeys":["operation"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"[operation] FTP","formatEN":"[operation] FTP"}
 func (b *BaseApi) OperateFtp(c *gin.Context) {
@@ -70,16 +70,16 @@ func (b *BaseApi) OperateFtp(c *gin.Context) {
 		return
 	}
 
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags FTP
 // @Summary Page FTP user
-// @Description 获取 FTP 账户列表分页
 // @Accept json
 // @Param request body dto.SearchWithPage true "request"
 // @Success 200 {object} dto.PageResult
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/ftp/search [post]
 func (b *BaseApi) SearchFtp(c *gin.Context) {
 	var req dto.SearchWithPage
@@ -101,11 +101,11 @@ func (b *BaseApi) SearchFtp(c *gin.Context) {
 
 // @Tags FTP
 // @Summary Create FTP user
-// @Description 创建 FTP 账户
 // @Accept json
 // @Param request body dto.FtpCreate true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/ftp [post]
 // @x-panel-log {"bodyKeys":["user", "path"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"创建 FTP 账户 [user][path]","formatEN":"create FTP [user][path]"}
 func (b *BaseApi) CreateFtp(c *gin.Context) {
@@ -131,11 +131,11 @@ func (b *BaseApi) CreateFtp(c *gin.Context) {
 
 // @Tags FTP
 // @Summary Delete FTP user
-// @Description 删除 FTP 账户
 // @Accept json
 // @Param request body dto.BatchDeleteReq true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/ftp/del [post]
 // @x-panel-log {"bodyKeys":["ids"],"paramKeys":[],"BeforeFunctions":[{"input_column":"id","input_value":"ids","isList":true,"db":"ftps","output_column":"user","output_value":"users"}],"formatZH":"删除 FTP 账户 [users]","formatEN":"delete FTP users [users]"}
 func (b *BaseApi) DeleteFtp(c *gin.Context) {
@@ -153,11 +153,11 @@ func (b *BaseApi) DeleteFtp(c *gin.Context) {
 
 // @Tags FTP
 // @Summary Sync FTP user
-// @Description 同步 FTP 账户
 // @Accept json
 // @Param request body dto.BatchDeleteReq true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/ftp/sync [post]
 // @x-panel-log {"bodyKeys":[],"paramKeys":[],"BeforeFunctions":[],"formatZH":"同步 FTP 账户","formatEN":"sync FTP users"}
 func (b *BaseApi) SyncFtp(c *gin.Context) {
@@ -170,11 +170,11 @@ func (b *BaseApi) SyncFtp(c *gin.Context) {
 
 // @Tags FTP
 // @Summary Update FTP user
-// @Description 修改 FTP 账户
 // @Accept json
 // @Param request body dto.FtpUpdate true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/ftp/update [post]
 // @x-panel-log {"bodyKeys":["user", "path"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"修改 FTP 账户 [user][path]","formatEN":"update FTP [user][path]"}
 func (b *BaseApi) UpdateFtp(c *gin.Context) {

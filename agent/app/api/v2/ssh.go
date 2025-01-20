@@ -8,9 +8,9 @@ import (
 
 // @Tags SSH
 // @Summary Load host SSH setting info
-// @Description 加载 SSH 配置信息
 // @Success 200 {object} dto.SSHInfo
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /host/ssh/search [post]
 func (b *BaseApi) GetSSHInfo(c *gin.Context) {
 	info, err := sshService.GetSSHInfo()
@@ -23,10 +23,11 @@ func (b *BaseApi) GetSSHInfo(c *gin.Context) {
 
 // @Tags SSH
 // @Summary Operate SSH
-// @Description 修改 SSH 服务状态
 // @Accept json
 // @Param request body dto.Operate true "request"
+// @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /host/ssh/operate [post]
 // @x-panel-log {"bodyKeys":["operation"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"[operation] SSH ","formatEN":"[operation] SSH"}
 func (b *BaseApi) OperateSSH(c *gin.Context) {
@@ -39,16 +40,16 @@ func (b *BaseApi) OperateSSH(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags SSH
 // @Summary Update host SSH setting
-// @Description 更新 SSH 配置
 // @Accept json
 // @Param request body dto.SSHUpdate true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /host/ssh/update [post]
 // @x-panel-log {"bodyKeys":["key","value"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"修改 SSH 配置 [key] => [value]","formatEN":"update SSH setting [key] => [value]"}
 func (b *BaseApi) UpdateSSH(c *gin.Context) {
@@ -61,16 +62,16 @@ func (b *BaseApi) UpdateSSH(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags SSH
 // @Summary Update host SSH setting by file
-// @Description 上传文件更新 SSH 配置
 // @Accept json
 // @Param request body dto.SSHConf true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /host/conffile/update [post]
 // @x-panel-log {"bodyKeys":[],"paramKeys":[],"BeforeFunctions":[],"formatZH":"修改 SSH 配置文件","formatEN":"update SSH conf"}
 func (b *BaseApi) UpdateSSHByfile(c *gin.Context) {
@@ -83,16 +84,16 @@ func (b *BaseApi) UpdateSSHByfile(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags SSH
 // @Summary Generate host SSH secret
-// @Description 生成 SSH 密钥
 // @Accept json
 // @Param request body dto.GenerateSSH true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /host/ssh/generate [post]
 // @x-panel-log {"bodyKeys":[],"paramKeys":[],"BeforeFunctions":[],"formatZH":"生成 SSH 密钥 ","formatEN":"generate SSH secret"}
 func (b *BaseApi) GenerateSSH(c *gin.Context) {
@@ -105,16 +106,16 @@ func (b *BaseApi) GenerateSSH(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags SSH
 // @Summary Load host SSH secret
-// @Description 获取 SSH 密钥
 // @Accept json
 // @Param request body dto.GenerateLoad true "request"
-// @Success 200
+// @Success 200 {string} secret
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /host/ssh/secret [post]
 func (b *BaseApi) LoadSSHSecret(c *gin.Context) {
 	var req dto.GenerateLoad
@@ -132,11 +133,11 @@ func (b *BaseApi) LoadSSHSecret(c *gin.Context) {
 
 // @Tags SSH
 // @Summary Load host SSH logs
-// @Description 获取 SSH 登录日志
 // @Accept json
 // @Param request body dto.SearchSSHLog true "request"
 // @Success 200 {object} dto.SSHLog
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /host/ssh/log [post]
 func (b *BaseApi) LoadSSHLogs(c *gin.Context) {
 	var req dto.SearchSSHLog
@@ -154,9 +155,9 @@ func (b *BaseApi) LoadSSHLogs(c *gin.Context) {
 
 // @Tags SSH
 // @Summary Load host SSH conf
-// @Description 获取 SSH 配置文件
-// @Success 200
+// @Success 200 {string} conf
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /host/ssh/conf [get]
 func (b *BaseApi) LoadSSHConf(c *gin.Context) {
 	data, err := sshService.LoadSSHConf()

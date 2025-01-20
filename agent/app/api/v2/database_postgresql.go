@@ -11,11 +11,11 @@ import (
 
 // @Tags Database Postgresql
 // @Summary Create postgresql database
-// @Description 创建 postgresql 数据库
 // @Accept json
 // @Param request body dto.PostgresqlDBCreate true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /databases/pg [post]
 // @x-panel-log {"bodyKeys":["name"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"创建 postgresql 数据库 [name]","formatEN":"create postgresql database [name]"}
 func (b *BaseApi) CreatePostgresql(c *gin.Context) {
@@ -37,16 +37,16 @@ func (b *BaseApi) CreatePostgresql(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags Database Postgresql
 // @Summary Bind postgresql user
-// @Description 绑定 postgresql 数据库用户
 // @Accept json
 // @Param request body dto.PostgresqlBindUser true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /databases/pg/bind [post]
 // @x-panel-log {"bodyKeys":["name", "username"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"绑定 postgresql 数据库 [name] 用户 [username]","formatEN":"bind postgresql database [name] user [username]"}
 func (b *BaseApi) BindPostgresqlUser(c *gin.Context) {
@@ -59,16 +59,16 @@ func (b *BaseApi) BindPostgresqlUser(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags Database Postgresql
 // @Summary Update postgresql database description
-// @Description 更新 postgresql 数据库库描述信息
 // @Accept json
 // @Param request body dto.UpdateDescription true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /databases/pg/description [post]
 // @x-panel-log {"bodyKeys":["id","description"],"paramKeys":[],"BeforeFunctions":[{"input_column":"id","input_value":"id","isList":false,"db":"database_postgresqls","output_column":"name","output_value":"name"}],"formatZH":"postgresql 数据库 [name] 描述信息修改 [description]","formatEN":"The description of the postgresql database [name] is modified => [description]"}
 func (b *BaseApi) UpdatePostgresqlDescription(c *gin.Context) {
@@ -81,16 +81,16 @@ func (b *BaseApi) UpdatePostgresqlDescription(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags Database Postgresql
 // @Summary Change postgresql privileges
-// @Description 修改 postgresql 用户权限
 // @Accept json
 // @Param request body dto.ChangeDBInfo true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /databases/pg/privileges [post]
 // @x-panel-log {"bodyKeys":["database", "username"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"更新数据库 [database] 用户 [username] 权限","formatEN":"Update [user] privileges of database [database]"}
 func (b *BaseApi) ChangePostgresqlPrivileges(c *gin.Context) {
@@ -103,16 +103,16 @@ func (b *BaseApi) ChangePostgresqlPrivileges(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags Database Postgresql
 // @Summary Change postgresql password
-// @Description 修改 postgresql 密码
 // @Accept json
 // @Param request body dto.ChangeDBInfo true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /databases/pg/password [post]
 // @x-panel-log {"bodyKeys":["id"],"paramKeys":[],"BeforeFunctions":[{"input_column":"id","input_value":"id","isList":false,"db":"database_postgresqls","output_column":"name","output_value":"name"}],"formatZH":"更新数据库 [name] 密码","formatEN":"Update database [name] password"}
 func (b *BaseApi) ChangePostgresqlPassword(c *gin.Context) {
@@ -134,16 +134,16 @@ func (b *BaseApi) ChangePostgresqlPassword(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags Database Postgresql
 // @Summary Page postgresql databases
-// @Description 获取 postgresql 数据库列表分页
 // @Accept json
 // @Param request body dto.PostgresqlDBSearch true "request"
 // @Success 200 {object} dto.PageResult
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /databases/pg/search [post]
 func (b *BaseApi) SearchPostgresql(c *gin.Context) {
 	var req dto.PostgresqlDBSearch
@@ -165,10 +165,10 @@ func (b *BaseApi) SearchPostgresql(c *gin.Context) {
 
 // @Tags Database Postgresql
 // @Summary Load postgresql database from remote
-// @Description 从服务器获取
 // @Accept json
 // @Param request body dto.PostgresqlLoadDB true "request"
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /databases/pg/:database/load [post]
 func (b *BaseApi) LoadPostgresqlDBFromRemote(c *gin.Context) {
 	database, err := helper.GetStrParamByKey(c, "database")
@@ -182,16 +182,16 @@ func (b *BaseApi) LoadPostgresqlDBFromRemote(c *gin.Context) {
 		return
 	}
 
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags Database Postgresql
 // @Summary Check before delete postgresql database
-// @Description Postgresql 数据库删除前检查
 // @Accept json
 // @Param request body dto.PostgresqlDBDeleteCheck true "request"
 // @Success 200 {array} string
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /databases/pg/del/check [post]
 func (b *BaseApi) DeleteCheckPostgresql(c *gin.Context) {
 	var req dto.PostgresqlDBDeleteCheck
@@ -209,11 +209,11 @@ func (b *BaseApi) DeleteCheckPostgresql(c *gin.Context) {
 
 // @Tags Database Postgresql
 // @Summary Delete postgresql database
-// @Description 删除 postgresql 数据库
 // @Accept json
 // @Param request body dto.PostgresqlDBDelete true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /databases/pg/del [post]
 // @x-panel-log {"bodyKeys":["id"],"paramKeys":[],"BeforeFunctions":[{"input_column":"id","input_value":"id","isList":false,"db":"database_postgresqls","output_column":"name","output_value":"name"}],"formatZH":"删除 postgresql 数据库 [name]","formatEN":"delete postgresql database [name]"}
 func (b *BaseApi) DeletePostgresql(c *gin.Context) {
@@ -228,5 +228,5 @@ func (b *BaseApi) DeletePostgresql(c *gin.Context) {
 		return
 	}
 	tx.Commit()
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }

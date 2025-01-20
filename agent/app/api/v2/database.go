@@ -10,11 +10,11 @@ import (
 
 // @Tags Database
 // @Summary Create database
-// @Description 创建远程数据库
 // @Accept json
 // @Param request body dto.DatabaseCreate true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /databases/db [post]
 // @x-panel-log {"bodyKeys":["name", "type"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"创建远程数据库 [name][type]","formatEN":"create database [name][type]"}
 func (b *BaseApi) CreateDatabase(c *gin.Context) {
@@ -35,16 +35,16 @@ func (b *BaseApi) CreateDatabase(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags Database
 // @Summary Check database
-// @Description 检测远程数据库连接性
 // @Accept json
 // @Param request body dto.DatabaseCreate true "request"
-// @Success 200
+// @Success 200 {boolean} isOk
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /databases/db/check [post]
 // @x-panel-log {"bodyKeys":["name", "type"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"检测远程数据库 [name][type] 连接性","formatEN":"check if database [name][type] is connectable"}
 func (b *BaseApi) CheckDatabase(c *gin.Context) {
@@ -66,11 +66,11 @@ func (b *BaseApi) CheckDatabase(c *gin.Context) {
 
 // @Tags Database
 // @Summary Page databases
-// @Description 获取远程数据库列表分页
 // @Accept json
 // @Param request body dto.DatabaseSearch true "request"
 // @Success 200 {object} dto.PageResult
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /databases/db/search [post]
 func (b *BaseApi) SearchDatabase(c *gin.Context) {
 	var req dto.DatabaseSearch
@@ -92,9 +92,9 @@ func (b *BaseApi) SearchDatabase(c *gin.Context) {
 
 // @Tags Database
 // @Summary List databases
-// @Description 获取远程数据库列表
 // @Success 200 {array} dto.DatabaseOption
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /databases/db/list/:type [get]
 func (b *BaseApi) ListDatabase(c *gin.Context) {
 	dbType, err := helper.GetStrParamByKey(c, "type")
@@ -113,9 +113,9 @@ func (b *BaseApi) ListDatabase(c *gin.Context) {
 
 // @Tags Database
 // @Summary List databases
-// @Description 获取数据库列表
 // @Success 200 {array} dto.DatabaseItem
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /databases/db/item/:type [get]
 func (b *BaseApi) LoadDatabaseItems(c *gin.Context) {
 	dbType, err := helper.GetStrParamByKey(c, "type")
@@ -134,9 +134,9 @@ func (b *BaseApi) LoadDatabaseItems(c *gin.Context) {
 
 // @Tags Database
 // @Summary Get databases
-// @Description 获取远程数据库
 // @Success 200 {object} dto.DatabaseInfo
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /databases/db/:name [get]
 func (b *BaseApi) GetDatabase(c *gin.Context) {
 	name, err := helper.GetStrParamByKey(c, "name")
@@ -155,11 +155,11 @@ func (b *BaseApi) GetDatabase(c *gin.Context) {
 
 // @Tags Database
 // @Summary Check before delete remote database
-// @Description Mysql 远程数据库删除前检查
 // @Accept json
 // @Param request body dto.OperateByID true "request"
 // @Success 200 {array} string
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /db/remote/del/check [post]
 func (b *BaseApi) DeleteCheckDatabase(c *gin.Context) {
 	var req dto.OperateByID
@@ -177,11 +177,11 @@ func (b *BaseApi) DeleteCheckDatabase(c *gin.Context) {
 
 // @Tags Database
 // @Summary Delete database
-// @Description 删除远程数据库
 // @Accept json
 // @Param request body dto.DatabaseDelete true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /databases/db/del [post]
 // @x-panel-log {"bodyKeys":["ids"],"paramKeys":[],"BeforeFunctions":[{"input_column":"id","input_value":"ids","isList":true,"db":"databases","output_column":"name","output_value":"names"}],"formatZH":"删除远程数据库 [names]","formatEN":"delete database [names]"}
 func (b *BaseApi) DeleteDatabase(c *gin.Context) {
@@ -194,16 +194,16 @@ func (b *BaseApi) DeleteDatabase(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags Database
 // @Summary Update database
-// @Description 更新远程数据库
 // @Accept json
 // @Param request body dto.DatabaseUpdate true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /databases/db/update [post]
 // @x-panel-log {"bodyKeys":["name"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"更新远程数据库 [name]","formatEN":"update database [name]"}
 func (b *BaseApi) UpdateDatabase(c *gin.Context) {
@@ -224,5 +224,5 @@ func (b *BaseApi) UpdateDatabase(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }

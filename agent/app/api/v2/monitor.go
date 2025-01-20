@@ -12,10 +12,10 @@ import (
 
 // @Tags Monitor
 // @Summary Load monitor data
-// @Description 获取监控数据
 // @Param request body dto.MonitorSearch true "request"
-// @Success 200
+// @Success 200 {array} dto.MonitorData
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /hosts/monitor/search [post]
 func (b *BaseApi) LoadMonitor(c *gin.Context) {
 	var req dto.MonitorSearch
@@ -33,9 +33,9 @@ func (b *BaseApi) LoadMonitor(c *gin.Context) {
 
 // @Tags Monitor
 // @Summary Clean monitor data
-// @Description 清空监控数据
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /hosts/monitor/clean [post]
 // @x-panel-log {"bodyKeys":[],"paramKeys":[],"BeforeFunctions":[],"formatZH":"清空监控数据","formatEN":"clean monitor datas"}
 func (b *BaseApi) CleanMonitor(c *gin.Context) {
@@ -44,14 +44,14 @@ func (b *BaseApi) CleanMonitor(c *gin.Context) {
 		return
 	}
 
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags Monitor
 // @Summary Load monitor setting
-// @Description 获取默认监控设置
-// @Success 200
+// @Success 200 {object} dto.MonitorSetting
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /hosts/monitor/setting [get]
 func (b *BaseApi) LoadMonitorSetting(c *gin.Context) {
 	setting, err := monitorService.LoadSetting()
@@ -65,10 +65,10 @@ func (b *BaseApi) LoadMonitorSetting(c *gin.Context) {
 
 // @Tags Monitor
 // @Summary Update monitor setting
-// @Description 更新默认监控设置
 // @Param request body dto.MonitorSettingUpdate true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /hosts/monitor/setting/update [post]
 // @x-panel-log {"bodyKeys":["key", "value"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"修改默认监控网卡 [name]-[value]","formatEN":"update default monitor [name]-[value]"}
 func (b *BaseApi) UpdateMonitorSetting(c *gin.Context) {
@@ -81,7 +81,7 @@ func (b *BaseApi) UpdateMonitorSetting(c *gin.Context) {
 		return
 	}
 
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 func (b *BaseApi) GetNetworkOptions(c *gin.Context) {

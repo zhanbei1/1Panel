@@ -10,11 +10,11 @@ import (
 
 // @Tags App
 // @Summary List apps
-// @Description 获取应用列表
 // @Accept json
 // @Param request body request.AppSearch true "request"
-// @Success 200
+// @Success 200 {object} response.AppRes
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /apps/search [post]
 func (b *BaseApi) SearchApp(c *gin.Context) {
 	var req request.AppSearch
@@ -31,9 +31,9 @@ func (b *BaseApi) SearchApp(c *gin.Context) {
 
 // @Tags App
 // @Summary Sync remote app list
-// @Description 同步远程应用列表
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /apps/sync/remote [post]
 // @x-panel-log {"bodyKeys":[],"paramKeys":[],"BeforeFunctions":[],"formatZH":"应用商店同步","formatEN":"App store synchronization"}
 func (b *BaseApi) SyncApp(c *gin.Context) {
@@ -58,14 +58,14 @@ func (b *BaseApi) SyncApp(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags App
 // @Summary Sync local  app list
-// @Description 同步本地应用列表
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /apps/sync/local [post]
 // @x-panel-log {"bodyKeys":[],"paramKeys":[],"BeforeFunctions":[],"formatZH":"应用商店同步","formatEN":"App store synchronization"}
 func (b *BaseApi) SyncLocalApp(c *gin.Context) {
@@ -79,11 +79,11 @@ func (b *BaseApi) SyncLocalApp(c *gin.Context) {
 
 // @Tags App
 // @Summary Search app by key
-// @Description 通过 key 获取应用信息
 // @Accept json
 // @Param key path string true "app key"
 // @Success 200 {object} response.AppDTO
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /apps/:key [get]
 func (b *BaseApi) GetApp(c *gin.Context) {
 	appKey, err := helper.GetStrParamByKey(c, "key")
@@ -101,13 +101,13 @@ func (b *BaseApi) GetApp(c *gin.Context) {
 
 // @Tags App
 // @Summary Search app detail by appid
-// @Description 通过 appid 获取应用详情
 // @Accept json
 // @Param appId path integer true "app id"
 // @Param version path string true "app 版本"
 // @Param version path string true "app 类型"
 // @Success 200 {object} response.AppDetailDTO
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /apps/detail/:appId/:version/:type [get]
 func (b *BaseApi) GetAppDetail(c *gin.Context) {
 	appID, err := helper.GetIntParamByKey(c, "appId")
@@ -127,11 +127,11 @@ func (b *BaseApi) GetAppDetail(c *gin.Context) {
 
 // @Tags App
 // @Summary Get app detail by id
-// @Description 通过 id 获取应用详情
 // @Accept json
 // @Param appId path integer true "id"
 // @Success 200 {object} response.AppDetailDTO
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /apps/details/:id [get]
 func (b *BaseApi) GetAppDetailByID(c *gin.Context) {
 	appDetailID, err := helper.GetIntParamByKey(c, "id")
@@ -149,10 +149,10 @@ func (b *BaseApi) GetAppDetailByID(c *gin.Context) {
 
 // @Tags App
 // @Summary Get Ignore App
-// @Description 获取忽略的应用版本
 // @Accept json
-// @Success 200 {object} response.IgnoredApp
+// @Success 200 {array} response.IgnoredApp
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /apps/ignored [get]
 func (b *BaseApi) GetIgnoredApp(c *gin.Context) {
 	res, err := appService.GetIgnoredApp()
@@ -165,11 +165,11 @@ func (b *BaseApi) GetIgnoredApp(c *gin.Context) {
 
 // @Tags App
 // @Summary Install app
-// @Description 安装应用
 // @Accept json
 // @Param request body request.AppInstallCreate true "request"
 // @Success 200 {object} model.AppInstall
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /apps/install [post]
 // @x-panel-log {"bodyKeys":["name"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"安装应用 [name]","formatEN":"Install app [name]"}
 func (b *BaseApi) InstallApp(c *gin.Context) {
@@ -196,9 +196,9 @@ func (b *BaseApi) GetAppTags(c *gin.Context) {
 
 // @Tags App
 // @Summary Get app list update
-// @Description 获取应用更新版本
-// @Success 200
+// @Success 200 {object} response.AppUpdateRes
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /apps/checkupdate [get]
 func (b *BaseApi) GetAppListUpdate(c *gin.Context) {
 	res, err := appService.GetAppUpdate()
@@ -211,11 +211,11 @@ func (b *BaseApi) GetAppListUpdate(c *gin.Context) {
 
 // @Tags App
 // @Summary Update appstore config
-// @Description 更新应用商店配置
 // @Accept json
 // @Param request body request.AppstoreUpdate true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /apps/store/update [post]
 func (b *BaseApi) UpdateAppstoreConfig(c *gin.Context) {
 	var req request.AppstoreUpdate
@@ -232,9 +232,9 @@ func (b *BaseApi) UpdateAppstoreConfig(c *gin.Context) {
 
 // @Tags App
 // @Summary Get appstore config
-// @Description 获取应用商店配置
 // @Success 200 {object} response.AppstoreConfig
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /apps/store/config [get]
 func (b *BaseApi) GetAppstoreConfig(c *gin.Context) {
 	res, err := appService.GetAppstoreConfig()

@@ -8,11 +8,11 @@ import (
 
 // @Tags Database Common
 // @Summary Load base info
-// @Description 获取数据库基础信息
 // @Accept json
 // @Param request body dto.OperationWithNameAndType true "request"
 // @Success 200 {object} dto.DBBaseInfo
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /databases/common/info [post]
 func (b *BaseApi) LoadDBBaseInfo(c *gin.Context) {
 	var req dto.OperationWithNameAndType
@@ -31,11 +31,11 @@ func (b *BaseApi) LoadDBBaseInfo(c *gin.Context) {
 
 // @Tags Database Common
 // @Summary Load Database conf
-// @Description 获取数据库配置文件
 // @Accept json
 // @Param request body dto.OperationWithNameAndType true "request"
-// @Success 200
+// @Success 200 {string} content
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /databases/common/load/file [post]
 func (b *BaseApi) LoadDBFile(c *gin.Context) {
 	var req dto.OperationWithNameAndType
@@ -52,11 +52,11 @@ func (b *BaseApi) LoadDBFile(c *gin.Context) {
 
 // @Tags Database Common
 // @Summary Update conf by upload file
-// @Description 上传替换配置文件
 // @Accept json
 // @Param request body dto.DBConfUpdateByFile true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /databases/common/update/conf [post]
 // @x-panel-log {"bodyKeys":["type","database"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"更新 [type] 数据库 [database] 配置信息","formatEN":"update the [type] [database] database configuration information"}
 func (b *BaseApi) UpdateDBConfByFile(c *gin.Context) {
@@ -70,5 +70,5 @@ func (b *BaseApi) UpdateDBConfByFile(c *gin.Context) {
 		return
 	}
 
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }

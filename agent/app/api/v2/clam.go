@@ -8,11 +8,11 @@ import (
 
 // @Tags Clam
 // @Summary Create clam
-// @Description 创建扫描规则
 // @Accept json
 // @Param request body dto.ClamCreate true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/clam [post]
 // @x-panel-log {"bodyKeys":["name","path"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"创建扫描规则 [name][path]","formatEN":"create clam [name][path]"}
 func (b *BaseApi) CreateClam(c *gin.Context) {
@@ -25,16 +25,16 @@ func (b *BaseApi) CreateClam(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags Clam
 // @Summary Update clam
-// @Description 修改扫描规则
 // @Accept json
 // @Param request body dto.ClamUpdate true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/clam/update [post]
 // @x-panel-log {"bodyKeys":["name","path"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"修改扫描规则 [name][path]","formatEN":"update clam [name][path]"}
 func (b *BaseApi) UpdateClam(c *gin.Context) {
@@ -47,16 +47,16 @@ func (b *BaseApi) UpdateClam(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags Clam
 // @Summary Update clam status
-// @Description 修改扫描规则状态
 // @Accept json
 // @Param request body dto.ClamUpdateStatus true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/clam/status/update [post]
 // @x-panel-log {"bodyKeys":["id","status"],"paramKeys":[],"BeforeFunctions":[{"input_column":"id","input_value":"id","isList":false,"db":"clams","output_column":"name","output_value":"name"}],"formatZH":"修改扫描规则 [name] 状态为 [status]","formatEN":"change the status of clam [name] to [status]."}
 func (b *BaseApi) UpdateClamStatus(c *gin.Context) {
@@ -69,16 +69,16 @@ func (b *BaseApi) UpdateClamStatus(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags Clam
 // @Summary Page clam
-// @Description 获取扫描规则列表分页
 // @Accept json
 // @Param request body dto.SearchClamWithPage true "request"
 // @Success 200 {object} dto.PageResult
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/clam/search [post]
 func (b *BaseApi) SearchClam(c *gin.Context) {
 	var req dto.SearchClamWithPage
@@ -100,10 +100,10 @@ func (b *BaseApi) SearchClam(c *gin.Context) {
 
 // @Tags Clam
 // @Summary Load clam base info
-// @Description 获取 Clam 基础信息
 // @Accept json
 // @Success 200 {object} dto.ClamBaseInfo
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/clam/base [get]
 func (b *BaseApi) LoadClamBaseInfo(c *gin.Context) {
 	info, err := clamService.LoadBaseInfo()
@@ -117,10 +117,11 @@ func (b *BaseApi) LoadClamBaseInfo(c *gin.Context) {
 
 // @Tags Clam
 // @Summary Operate Clam
-// @Description 修改 Clam 状态
 // @Accept json
+// @Success 200
 // @Param request body dto.Operate true "request"
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/clam/operate [post]
 // @x-panel-log {"bodyKeys":["operation"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"[operation] Clam","formatEN":"[operation] FTP"}
 func (b *BaseApi) OperateClam(c *gin.Context) {
@@ -134,15 +135,16 @@ func (b *BaseApi) OperateClam(c *gin.Context) {
 		return
 	}
 
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags Clam
 // @Summary Clean clam record
-// @Description 清空扫描报告
 // @Accept json
 // @Param request body dto.OperateByID true "request"
+// @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/clam/record/clean [post]
 // @x-panel-log {"bodyKeys":["id"],"paramKeys":[],"BeforeFunctions":[{"input_column":"id","input_value":"id","isList":true,"db":"clams","output_column":"name","output_value":"name"}],"formatZH":"清空扫描报告 [name]","formatEN":"clean clam record [name]"}
 func (b *BaseApi) CleanClamRecord(c *gin.Context) {
@@ -155,16 +157,16 @@ func (b *BaseApi) CleanClamRecord(c *gin.Context) {
 		return
 	}
 
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags Clam
 // @Summary Page clam record
-// @Description 获取扫描结果列表分页
 // @Accept json
 // @Param request body dto.ClamLogSearch true "request"
 // @Success 200 {object} dto.PageResult
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/clam/record/search [post]
 func (b *BaseApi) SearchClamRecord(c *gin.Context) {
 	var req dto.ClamLogSearch
@@ -186,11 +188,11 @@ func (b *BaseApi) SearchClamRecord(c *gin.Context) {
 
 // @Tags Clam
 // @Summary Load clam record detail
-// @Description 获取扫描结果详情
 // @Accept json
 // @Param request body dto.ClamLogReq true "request"
-// @Success 200
+// @Success 200 {string} content
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/clam/record/log [post]
 func (b *BaseApi) LoadClamRecordLog(c *gin.Context) {
 	var req dto.ClamLogReq
@@ -209,11 +211,11 @@ func (b *BaseApi) LoadClamRecordLog(c *gin.Context) {
 
 // @Tags Clam
 // @Summary Load clam file
-// @Description 获取扫描文件
 // @Accept json
 // @Param request body dto.ClamFileReq true "request"
-// @Success 200 {object} dto.PageResult
+// @Success 200 {string} content
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/clam/file/search [post]
 func (b *BaseApi) SearchClamFile(c *gin.Context) {
 	var req dto.ClamFileReq
@@ -232,11 +234,11 @@ func (b *BaseApi) SearchClamFile(c *gin.Context) {
 
 // @Tags Clam
 // @Summary Update clam file
-// @Description 更新病毒扫描配置文件
 // @Accept json
 // @Param request body dto.UpdateByNameAndFile true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/clam/file/update [post]
 func (b *BaseApi) UpdateFile(c *gin.Context) {
 	var req dto.UpdateByNameAndFile
@@ -252,11 +254,11 @@ func (b *BaseApi) UpdateFile(c *gin.Context) {
 
 // @Tags Clam
 // @Summary Delete clam
-// @Description 删除扫描规则
 // @Accept json
 // @Param request body dto.ClamDelete true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/clam/del [post]
 // @x-panel-log {"bodyKeys":["ids"],"paramKeys":[],"BeforeFunctions":[{"input_column":"id","input_value":"ids","isList":true,"db":"clams","output_column":"name","output_value":"names"}],"formatZH":"删除扫描规则 [names]","formatEN":"delete clam [names]"}
 func (b *BaseApi) DeleteClam(c *gin.Context) {
@@ -269,16 +271,16 @@ func (b *BaseApi) DeleteClam(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags Clam
 // @Summary Handle clam scan
-// @Description 执行病毒扫描
 // @Accept json
 // @Param request body dto.OperateByID true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /toolbox/clam/handle [post]
 // @x-panel-log {"bodyKeys":["id"],"paramKeys":[],"BeforeFunctions":[{"input_column":"id","input_value":"id","isList":true,"db":"clams","output_column":"name","output_value":"name"}],"formatZH":"执行病毒扫描 [name]","formatEN":"handle clam scan [name]"}
 func (b *BaseApi) HandleClamScan(c *gin.Context) {
@@ -291,5 +293,5 @@ func (b *BaseApi) HandleClamScan(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }

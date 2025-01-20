@@ -7,12 +7,12 @@ import (
 )
 
 // @Tags Host tool
-// @Summary Get tool
-// @Description 获取主机工具状态
+// @Summary Get tool status
 // @Accept json
 // @Param request body request.HostToolReq true "request"
-// @Success 200
+// @Success 200 {object} response.HostToolRes
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /host/tool [post]
 func (b *BaseApi) GetToolStatus(c *gin.Context) {
 	var req request.HostToolReq
@@ -30,11 +30,11 @@ func (b *BaseApi) GetToolStatus(c *gin.Context) {
 
 // @Tags Host tool
 // @Summary Create Host tool Config
-// @Description 创建主机工具配置
 // @Accept json
 // @Param request body request.HostToolCreate true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /host/tool/create [post]
 // @x-panel-log {"bodyKeys":["type"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"创建 [type] 配置","formatEN":"create [type] config"}
 func (b *BaseApi) InitToolConfig(c *gin.Context) {
@@ -52,11 +52,11 @@ func (b *BaseApi) InitToolConfig(c *gin.Context) {
 
 // @Tags Host tool
 // @Summary Operate tool
-// @Description 操作主机工具
 // @Accept json
 // @Param request body request.HostToolReq true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /host/tool/operate [post]
 // @x-panel-log {"bodyKeys":["operate","type"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"[operate] [type] ","formatEN":"[operate] [type]"}
 func (b *BaseApi) OperateTool(c *gin.Context) {
@@ -74,11 +74,11 @@ func (b *BaseApi) OperateTool(c *gin.Context) {
 
 // @Tags Host tool
 // @Summary Get tool config
-// @Description 操作主机工具配置文件
 // @Accept json
 // @Param request body request.HostToolConfig true "request"
-// @Success 200
+// @Success 200 {object} response.HostToolConfig
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /host/tool/config [post]
 // @x-panel-log {"bodyKeys":["operate"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"[operate] 主机工具配置文件 ","formatEN":"[operate] tool config"}
 func (b *BaseApi) OperateToolConfig(c *gin.Context) {
@@ -96,12 +96,12 @@ func (b *BaseApi) OperateToolConfig(c *gin.Context) {
 }
 
 // @Tags Host tool
-// @Summary Get tool
-// @Description 获取主机工具日志
+// @Summary Get tool logs
 // @Accept json
 // @Param request body request.HostToolLogReq true "request"
-// @Success 200
+// @Success 200 {string} logContent
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /host/tool/log [post]
 func (b *BaseApi) GetToolLog(c *gin.Context) {
 	var req request.HostToolLogReq
@@ -119,11 +119,11 @@ func (b *BaseApi) GetToolLog(c *gin.Context) {
 
 // @Tags Host tool
 // @Summary Create Supervisor process
-// @Description 操作守护进程
 // @Accept json
 // @Param request body request.SupervisorProcessConfig true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /host/tool/supervisor/process [post]
 // @x-panel-log {"bodyKeys":["operate"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"[operate] 守护进程 ","formatEN":"[operate] process"}
 func (b *BaseApi) OperateProcess(c *gin.Context) {
@@ -142,10 +142,10 @@ func (b *BaseApi) OperateProcess(c *gin.Context) {
 
 // @Tags Host tool
 // @Summary Get Supervisor process config
-// @Description 获取 Supervisor 进程配置
 // @Accept json
-// @Success 200
+// @Success 200 {object} response.SupervisorProcessConfig
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /host/tool/supervisor/process [get]
 func (b *BaseApi) GetProcess(c *gin.Context) {
 	configs, err := hostToolService.GetSupervisorProcessConfig()
@@ -157,12 +157,12 @@ func (b *BaseApi) GetProcess(c *gin.Context) {
 }
 
 // @Tags Host tool
-// @Summary Get Supervisor process config
-// @Description 操作 Supervisor 进程文件
+// @Summary Get Supervisor process config file
 // @Accept json
 // @Param request body request.SupervisorProcessFileReq true "request"
-// @Success 200
+// @Success 200 {string} content
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /host/tool/supervisor/process/file [post]
 // @x-panel-log {"bodyKeys":["operate"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"[operate] Supervisor 进程文件 ","formatEN":"[operate] Supervisor Process Config file"}
 func (b *BaseApi) GetProcessFile(c *gin.Context) {

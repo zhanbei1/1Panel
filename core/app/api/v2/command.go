@@ -9,11 +9,11 @@ import (
 
 // @Tags Command
 // @Summary Create command
-// @Description 创建快速命令
 // @Accept json
 // @Param request body dto.CommandOperate true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /core/commands [post]
 // @x-panel-log {"bodyKeys":["name","command"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"创建快捷命令 [name][command]","formatEN":"create quick command [name][command]"}
 func (b *BaseApi) CreateCommand(c *gin.Context) {
@@ -26,16 +26,16 @@ func (b *BaseApi) CreateCommand(c *gin.Context) {
 		helper.ErrorWithDetail(c, constant.CodeErrInternalServer, constant.ErrTypeInternalServer, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags Command
 // @Summary Page commands
-// @Description 获取快速命令列表分页
 // @Accept json
 // @Param request body dto.SearchWithPage true "request"
 // @Success 200 {object} dto.PageResult
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /core/commands/search [post]
 func (b *BaseApi) SearchCommand(c *gin.Context) {
 	var req dto.SearchCommandWithPage
@@ -57,11 +57,11 @@ func (b *BaseApi) SearchCommand(c *gin.Context) {
 
 // @Tags Command
 // @Summary Tree commands
-// @Description 获取快速命令树
 // @Accept json
 // @Param request body dto.OperateByType true "request"
 // @Success 200 {Array} dto.CommandTree
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /core/commands/tree [get]
 func (b *BaseApi) SearchCommandTree(c *gin.Context) {
 	var req dto.OperateByType
@@ -80,11 +80,11 @@ func (b *BaseApi) SearchCommandTree(c *gin.Context) {
 
 // @Tags Command
 // @Summary List commands
-// @Description 获取快速命令列表
 // @Accept json
 // @Param request body dto.OperateByType true "request"
 // @Success 200 {object} dto.CommandInfo
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /core/commands/command [get]
 func (b *BaseApi) ListCommand(c *gin.Context) {
 	var req dto.OperateByType
@@ -103,11 +103,11 @@ func (b *BaseApi) ListCommand(c *gin.Context) {
 
 // @Tags Command
 // @Summary Delete command
-// @Description 删除快速命令
 // @Accept json
 // @Param request body dto.OperateByIDs true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /core/commands/del [post]
 // @x-panel-log {"bodyKeys":["ids"],"paramKeys":[],"BeforeFunctions":[{"input_column":"id","input_value":"ids","isList":true,"db":"commands","output_column":"name","output_value":"names"}],"formatZH":"删除快捷命令 [names]","formatEN":"delete quick command [names]"}
 func (b *BaseApi) DeleteCommand(c *gin.Context) {
@@ -120,16 +120,16 @@ func (b *BaseApi) DeleteCommand(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags Command
 // @Summary Update command
-// @Description 更新快速命令
 // @Accept json
 // @Param request body dto.CommandOperate true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /core/commands/update [post]
 // @x-panel-log {"bodyKeys":["name"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"更新快捷命令 [name]","formatEN":"update quick command [name]"}
 func (b *BaseApi) UpdateCommand(c *gin.Context) {
@@ -146,5 +146,5 @@ func (b *BaseApi) UpdateCommand(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }

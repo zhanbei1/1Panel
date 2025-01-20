@@ -2,6 +2,7 @@ package v2
 
 import (
 	"encoding/base64"
+
 	"github.com/1Panel-dev/1Panel/core/utils/geo"
 
 	"github.com/1Panel-dev/1Panel/core/app/api/v2/helper"
@@ -18,7 +19,6 @@ type BaseApi struct{}
 
 // @Tags Auth
 // @Summary User login
-// @Description 用户登录
 // @Accept json
 // @Param EntranceCode header string true "安全入口 base64 加密串"
 // @Param request body dto.Login true "request"
@@ -53,7 +53,6 @@ func (b *BaseApi) Login(c *gin.Context) {
 
 // @Tags Auth
 // @Summary User login with mfa
-// @Description 用户 mfa 登录
 // @Accept json
 // @Param request body dto.MFALogin true "request"
 // @Success 200 {object} dto.UserLoginInfo
@@ -81,21 +80,20 @@ func (b *BaseApi) MFALogin(c *gin.Context) {
 
 // @Tags Auth
 // @Summary User logout
-// @Description 用户登出
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /core/auth/logout [post]
 func (b *BaseApi) LogOut(c *gin.Context) {
 	if err := authService.LogOut(c); err != nil {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags Auth
 // @Summary Load captcha
-// @Description 加载验证码
 // @Success 200 {object} dto.CaptchaResponse
 // @Router /core/auth/captcha [get]
 func (b *BaseApi) Captcha(c *gin.Context) {
@@ -109,7 +107,6 @@ func (b *BaseApi) Captcha(c *gin.Context) {
 
 // @Tags Auth
 // @Summary Load safety status
-// @Description 获取系统安全登录状态
 // @Success 200
 // @Router /core/auth/issafety [get]
 func (b *BaseApi) CheckIsSafety(c *gin.Context) {
@@ -145,7 +142,6 @@ func (b *BaseApi) GetResponsePage(c *gin.Context) {
 
 // @Tags Auth
 // @Summary Check System isDemo
-// @Description 判断是否为demo环境
 // @Success 200
 // @Router /core/auth/demo [get]
 func (b *BaseApi) CheckIsDemo(c *gin.Context) {
@@ -154,7 +150,6 @@ func (b *BaseApi) CheckIsDemo(c *gin.Context) {
 
 // @Tags Auth
 // @Summary Load System Language
-// @Description 获取系统语言设置
 // @Success 200
 // @Router /core/auth/language [get]
 func (b *BaseApi) GetLanguage(c *gin.Context) {
@@ -186,4 +181,12 @@ func saveLoginLogs(c *gin.Context, err error) {
 	logs.Agent = c.GetHeader("User-Agent")
 	logs.Address = address
 	_ = logService.CreateLoginLog(logs)
+}
+
+// @Tags Auth
+// @Summary Check System isDemo
+// @Success 200
+// @Router /auth/intl [get]
+func (b *BaseApi) CheckIsIntl(c *gin.Context) {
+	helper.SuccessWithData(c, global.CONF.System.IsIntl)
 }

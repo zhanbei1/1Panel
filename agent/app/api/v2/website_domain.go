@@ -8,11 +8,11 @@ import (
 
 // @Tags Website Domain
 // @Summary Delete website domain
-// @Description 删除网站域名
 // @Accept json
 // @Param request body request.WebsiteDomainDelete true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /websites/domains/del [post]
 // @x-panel-log {"bodyKeys":["id"],"paramKeys":[],"BeforeFunctions":[{"input_column":"id","input_value":"id","isList":false,"db":"website_domains","output_column":"domain","output_value":"domain"}],"formatZH":"删除域名 [domain]","formatEN":"Delete domain [domain]"}
 func (b *BaseApi) DeleteWebDomain(c *gin.Context) {
@@ -24,16 +24,16 @@ func (b *BaseApi) DeleteWebDomain(c *gin.Context) {
 		helper.InternalServer(c, err)
 		return
 	}
-	helper.SuccessWithData(c, nil)
+	helper.SuccessWithOutData(c)
 }
 
 // @Tags Website Domain
 // @Summary Create website domain
-// @Description 创建网站域名
 // @Accept json
 // @Param request body request.WebsiteDomainCreate true "request"
 // @Success 200 {object} model.WebsiteDomain
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /websites/domains [post]
 // @x-panel-log {"bodyKeys":["domain"],"paramKeys":[],"BeforeFunctions":[],"formatZH":"创建域名 [domain]","formatEN":"Create domain [domain]"}
 func (b *BaseApi) CreateWebDomain(c *gin.Context) {
@@ -51,11 +51,11 @@ func (b *BaseApi) CreateWebDomain(c *gin.Context) {
 
 // @Tags Website Domain
 // @Summary Search website domains by websiteId
-// @Description 通过网站 id 查询域名
 // @Accept json
 // @Param websiteId path integer true "request"
 // @Success 200 {array} model.WebsiteDomain
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /websites/domains/:websiteId [get]
 func (b *BaseApi) GetWebDomains(c *gin.Context) {
 	websiteId, err := helper.GetIntParamByKey(c, "websiteId")
@@ -71,14 +71,13 @@ func (b *BaseApi) GetWebDomains(c *gin.Context) {
 	helper.SuccessWithData(c, list)
 }
 
-// 写一个 update website domain 的接口
 // @Tags Website Domain
 // @Summary Update website domain
-// @Description 更新网站域名
 // @Accept json
 // @Param request body request.WebsiteDomainUpdate true "request"
 // @Success 200
 // @Security ApiKeyAuth
+// @Security Timestamp
 // @Router /websites/domains/update [post]
 // @x-panel-log {"bodyKeys":["id"],"paramKeys":[],"BeforeFunctions":[{"input_column":"id","input_value":"id","isList":false,"db":"website_domains","output_column":"domain","output_value":"domain"}],"formatZH":"更新域名 [domain]","formatEN":"Update domain [domain]"}
 func (b *BaseApi) UpdateWebDomain(c *gin.Context) {
