@@ -23,8 +23,9 @@ fi
 
 if [ ! -f "lang.tar.gz" ]; then 
   wget https://resource.1panel.hk/language/lang.tar.gz
-  tar zxvf lang.tar.gz
-  rm -rf lang.tar.gz
 fi
+
+tar zxvf lang.tar.gz
+rm -rf lang.tar.gz
 
 chmod 755 1pctl install.sh

@@ -28,9 +28,9 @@ builds:
     goarch:
       - amd64
       - arm64
-      - arm
-      - ppc64le
-      - s390x
+#      - arm
+#      - ppc64le
+#      - s390x
 
 archives:
   - format: tar.gz
