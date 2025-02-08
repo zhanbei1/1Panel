@@ -90,7 +90,7 @@
         "vue-tsc": "^0.29.8"
     },
     "overrides": {
-        "esbuild": "npm:esbuild-wasm@latest"
+        "esbuild": "npm:esbuild-wasm@0.24.0"
     },
     "config": {
         "commitizen": {
