@@ -102,6 +102,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
                         editorWorker: [`${prefix}/editor/editor.worker`],
                     },
                 },
+                external: ['lodash-es'],
             },
         },
     };
